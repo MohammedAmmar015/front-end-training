@@ -1,0 +1,185 @@
+body {
+    margin: 0;
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+}
+
+.container {
+    font-size: 14px;
+    font-weight: 600;
+    padding: 50px;
+    color: #495fa0b1;
+}
+
+/* left content styles started */
+
+.left-content {
+    width: 28%;
+    display: inline-block;
+}
+
+.left-content > div {
+    width: 90%;
+    margin: 0 auto;
+}
+
+.left-content .profile {
+    text-align: center;
+}
+
+.left-content .profile .photo {
+    width: 55%;
+    border-radius: 50%;
+}
+
+.left-content .profile .name {
+    margin: 0;
+    color: #495fa0;
+}
+
+.left-content .profile .role {
+    margin: 10px 0;
+    font-weight: 500;
+}
+
+.left-content .personal {
+    margin-top: 60px;
+}
+
+.left-content .personal .details {
+    padding-left: 10px;
+}
+
+.left-content .personal .details li {
+    list-style: none;
+    color: #495fa0;
+    font-weight: 700;
+    border-bottom: 2px solid #495fa025;
+    padding: 25px 0 25px 20px;
+}
+
+.left-content .personal .details li .icon {
+    color: #495fa0b1;
+    padding-right: 20px;
+}
+
+.left-content .personal .details li:last-child {
+    border-bottom: none;
+}
+
+.left-content .download .button {
+    margin: 25px 0;
+    font-size: 13px;
+    font-weight: 600;
+    padding: 14px 31px;
+    background-color: #377cfe;
+    color: rgb(212, 241, 254);
+    border: none;
+    border-radius: 7px;
+    box-shadow: 1px 1px 5px #377cfe;
+}
+
+/* left content styles ended */
+
+
+/* right content styles  */
+
+.right-content {
+    width: 68%;
+    display: inline-block;
+    position: absolute;
+}
+
+.right-content .icon {
+    padding-right: 10px;
+}
+
+.right-content>div {
+    width: 90%;
+    margin: 0 auto;
+}
+
+.right-content .heading {
+    margin: 0;
+    color: #495fa0;
+}
+
+.right-content .detail {
+    margin: 35px auto 70px auto;
+}
+
+.right-content .sub-heading {
+    margin: 0;
+    display: inline-block;
+    font-weight: 500;
+    width: 49%;
+}
+
+.right-content .detail .top-detail {
+    padding-top: 40px;
+    padding-bottom: 10px;
+}
+
+.right-content .summary .bottom-detail {
+    line-height: 25px;
+}
+
+.right-content .experience .work:first-child .top-detail {
+    padding-top: 0;
+}
+
+.right-content .education .education-detail:first-child .top-detail {
+    padding-top: 0;
+}
+
+.right-content .detail .work .top-detail .mode {
+    display: inline-block;
+    width: 49%;
+    text-align: right;
+}
+
+.right-content .detail .work .top-detail .mode p {
+    margin: 0;
+    display: inline;
+    color: #495fa0;
+    background-color: #d7ffe0;
+    padding: 8px 30px;
+    border-radius: 20px;
+    font-weight: 700;
+}
+
+.right-content .detail .bottom-detail {
+    border-bottom: 2px solid #495fa025;
+    padding-bottom: 40px;
+    font-weight: 700;
+    color: #495fa063;
+}
+
+.right-content .detail .bottom-detail > div {
+    display: inline-block;
+}
+
+.right-content .detail .work .bottom-detail div:first-child {
+    width: 19.5%
+}
+
+.right-content .detail .work .bottom-detail div:nth-child(2) {
+    width: 29%;
+}
+
+.right-content .detail .work .bottom-detail div:last-child {
+    width: 49%;
+    text-align: right;
+}
+
+.right-content .education .education-detail .bottom-detail div:first-child {
+    width: 49%;
+}
+
+.right-content .education .education-detail .bottom-detail div:last-child {
+    width: 49%;
+    text-align: right;
+}
+
+.right-content .education .education-detail:last-child .bottom-detail {
+    border-bottom: none;
+}
