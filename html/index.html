@@ -1,0 +1,177 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.2.1/css/all.min.css">
+  <link rel="stylesheet" href="../css/style.css">
+  <title>Todo</title>
+  <link rel="icon" type="image/x-icon" href="../images/favicon.ico">
+</head>
+
+<body>
+  <div class="container">
+    <!----------- top content ------------->
+    <div class="top-content">
+      <!---------- left content  ----------->
+      <div class="top-left-content">
+        <div class="app-launcher-icon">
+          <i class="fa-solid fa-ellipsis-vertical"></i>
+          <i class="fa-solid fa-ellipsis-vertical"></i>
+          <i class="fa-solid fa-ellipsis-vertical"></i>
+        </div>
+        <!-- <i class="menu-icon ms-Icon ms-Icon--WaffleOffice365" title="App Launcher"></i> -->
+        <h3 class="title-header">To Do</h3>
+      </div>
+
+      <!---------- middle content  ----------->
+      <div class="top-middle-content">
+        <div class="search-container" title="Search">
+          <i class="search-icon fa-solid fa-magnifying-glass"></i>
+          <input class="search-box" type="text" name="search" id="search-box" placeholder="Search">
+          <i class="search-icon ms-Icon ms-Icon--Clear"></i>
+        </div>
+      </div>
+
+      <!---------- right content  ----------->
+      <div class="top-right-content">
+        <i class="right-icon fa-solid fa-gear" title="Setting"></i>
+        <i class="right-icon fa-solid fa-question" title="Help & Feedback"></i>
+        <i class="right-icon fa-solid fa-bullhorn" title="What's new"></i>
+        <div class="right-icon name-logo" title="Account Manager">
+          <span>A</span>
+        </div>
+      </div>
+    </div>
+
+    <!----------- bottom content  ------------->
+    <div class="bottom-content">
+
+      <!---------- left content  ----------->
+      <div class="bottom-left-content">
+        <div class="menu-container">
+          <i class="menu-icon fa-solid fa-bars"></i>
+        </div>
+
+        <div class="default category-container">
+          <ul class="default categories">
+            <li>
+              <i class="left-category-icon fa-regular fa-sun"></i>
+              My Day
+            </li>
+            <li>
+              <i class="left-category-icon fa-regular fa-star"></i>
+              Important
+            </li>
+            <li>
+              <i class="left-category-icon fa-regular fa-calendar"></i>
+              Planned
+            </li>
+            <li>
+              <i class="left-category-icon fa-regular fa-user"></i>
+              Assigned to me
+            </li>
+            <li>
+              <i class="left-category-icon fa-solid fa-house"></i>
+              Tasks
+            </li>
+            <li></li>
+          </ul>
+        </div>
+
+        <div class="custom category-conatiner">
+          <ul class="custom categories">
+            <li>
+              <i class="left-category-icon fa-solid fa-bars"></i>
+              Test
+            </li>
+            <li class="create-category">
+              <div>
+                <i class="left-category-icon fa-solid fa-plus"></i>
+                <input class="add-category" type="text" name="new-list" id="new-list" placeholder="New List">
+              </div>
+              <div class="group-icon-container">
+                <i class="fa-solid fa-layer-group"></i>
+              </div>
+            </li>
+          </ul>
+        </div>
+
+        <div class="left-bottom-icon-container">
+          <i class="left-bottom-icon fa-regular fa-envelope"></i>
+          <i class="left-bottom-icon fa-regular fa-calendar-days"></i>
+          <i class="left-bottom-icon fa-solid fa-user-group"></i>
+          <i class="left-bottom-icon fa-solid fa-paperclip"></i>
+          <i class="left-bottom-icon fa-solid fa-check"></i>
+        </div>
+      </div><!--
+        
+        bottom middle content
+
+      --><div class="bottom-middle-content">
+        <div class="items-toolbar">
+          <div class="item-title-container">
+            <i class="icon fa-regular fa-sun"></i>
+            <h3 class="item-title">My Day</h3>
+            <i class="icon fa-solid fa-ellipsis"></i>
+          </div>
+          <div class="feature sort">
+            <i class="feature-icon fa-solid fa-arrow-right-arrow-left"></i>
+            Sort
+          </div>
+          <div class="feature suggestions">
+            <i class="feature-icon fa-regular fa-lightbulb"></i>
+            Suggestions
+          </div>
+          <div class="created-date">
+            Sunday, December 4
+          </div>
+        </div>
+
+        <ul class="items">
+          <li class="create item-box">
+            <div class="item-icon-container">
+              <i class="left-category-icon fa-solid fa-plus"></i>
+            </div>
+            <div class="item-name-container">
+              <input class="add-item" type="text" name="item" id="add-item" placeholder="Add a task">
+            </div>
+          </li>
+
+          <li class="item-conditions">
+            <div class="icon-container">
+              <i class="left-bottom-icon fa-regular fa-calendar-days"></i>
+              <i class="fa-regular fa-bell"></i>
+              <i class="fa-solid fa-repeat"></i>
+            </div>
+            <div class="button-container">
+              <input class="add-btn" type="button" value="Add">
+            </div>
+          </li>
+
+          <li class="item-box">
+            <div class="item-icon-container">
+              <i class="before-check fa-regular fa-circle"></i>
+            </div>
+            <div class="item-name-container">
+              <div class="item name">Demo</div>
+              <div class="category name">Tasks</div>
+            </div>
+            <div class="item-icon-container">
+              <i class="left-category-icon fa-regular fa-star"></i>
+            </div>
+          </li>
+        </ul>
+      </div>
+
+      <!---------- right content - pending  ----------->
+      <div class="bottom-right-content">
+
+      </div>
+    </div>
+  </div>
+</body>
+
+</html>
