@@ -5,28 +5,27 @@
   <meta charset="UTF-8">
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link rel="icon" type="image/x-icon" href="../images/favicon.ico">
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.2.1/css/all.min.css">
   <link rel="stylesheet" href="../css/style.css">
   <title>Todo</title>
-  <link rel="icon" type="image/x-icon" href="../images/favicon.ico">
 </head>
 
 <body>
   <div class="container">
     <!----------- top content ------------->
     <div class="top-content">
-      <!---------- left content  ----------->
+      <!---------- top left content  ----------->
       <div class="top-left-content">
-        <div class="app-launcher-icon">
+        <div class="app-launcher-icon" title="App Launcher">
           <i class="fa-solid fa-ellipsis-vertical"></i>
           <i class="fa-solid fa-ellipsis-vertical"></i>
           <i class="fa-solid fa-ellipsis-vertical"></i>
         </div>
-        <!-- <i class="menu-icon ms-Icon ms-Icon--WaffleOffice365" title="App Launcher"></i> -->
         <h3 class="title-header">To Do</h3>
       </div>
 
-      <!---------- middle content  ----------->
+      <!---------- top middle content  ----------->
       <div class="top-middle-content">
         <div class="search-container" title="Search">
           <i class="search-icon fa-solid fa-magnifying-glass"></i>
@@ -35,7 +34,7 @@
         </div>
       </div>
 
-      <!---------- right content  ----------->
+      <!---------- top right content  ----------->
       <div class="top-right-content">
         <i class="right-icon fa-solid fa-gear" title="Setting"></i>
         <i class="right-icon fa-solid fa-question" title="Help & Feedback"></i>
@@ -49,7 +48,7 @@
     <!----------- bottom content  ------------->
     <div class="bottom-content">
 
-      <!---------- left content  ----------->
+      <!---------- bottom left content  ----------->
       <div class="bottom-left-content">
         <div class="menu-container">
           <i class="menu-icon fa-solid fa-bars"></i>
@@ -59,23 +58,28 @@
           <ul class="default categories">
             <li>
               <i class="left-category-icon fa-regular fa-sun"></i>
-              My Day
+              <div class="category-name">My Day</div>
+              <div class="number-of-item"></div>
             </li>
             <li>
               <i class="left-category-icon fa-regular fa-star"></i>
-              Important
+              <div class="category-name">Important</div>
+              <div class="number-of-item"></div>
             </li>
             <li>
               <i class="left-category-icon fa-regular fa-calendar"></i>
-              Planned
+              <div class="category-name">Planned</div>
+              <div class="number-of-item"></div>
             </li>
             <li>
               <i class="left-category-icon fa-regular fa-user"></i>
-              Assigned to me
+              <div class="category-name">Assigned to me</div>
+              <div class="number-of-item"></div>
             </li>
             <li>
               <i class="left-category-icon fa-solid fa-house"></i>
-              Tasks
+              <div class="category-name">Tasks</div>
+              <div class="number-of-item"></div>
             </li>
             <li></li>
           </ul>
@@ -85,7 +89,8 @@
           <ul class="custom categories">
             <li>
               <i class="left-category-icon fa-solid fa-bars"></i>
-              Test
+              <div class="category-name">Test</div>
+              <div class="number-of-item"></div>
             </li>
             <li class="create-category">
               <div>
@@ -106,22 +111,22 @@
           <i class="left-bottom-icon fa-solid fa-paperclip"></i>
           <i class="left-bottom-icon fa-solid fa-check"></i>
         </div>
-      </div><!--
+      </div><!-------
         
         bottom middle content
 
-      --><div class="bottom-middle-content">
+ ------><div class="bottom-middle-content">
         <div class="items-toolbar">
           <div class="item-title-container">
             <i class="icon fa-regular fa-sun"></i>
             <h3 class="item-title">My Day</h3>
             <i class="icon fa-solid fa-ellipsis"></i>
           </div>
-          <div class="feature sort">
+          <div class="feature sort" title="Sort">
             <i class="feature-icon fa-solid fa-arrow-right-arrow-left"></i>
             Sort
           </div>
-          <div class="feature suggestions">
+          <div class="feature suggestions" title="Suggestions">
             <i class="feature-icon fa-regular fa-lightbulb"></i>
             Suggestions
           </div>
@@ -166,7 +171,7 @@
         </ul>
       </div>
 
-      <!---------- right content - pending  ----------->
+      <!---------- bottom right content - pending  ----------->
       <div class="bottom-right-content">
 
       </div>
