@@ -8,6 +8,7 @@
   <link rel="icon" type="image/x-icon" href="../images/favicon.ico">
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.2.1/css/all.min.css">
   <link rel="stylesheet" href="../css/style.css">
+  <script src="../js/script.js" defer></script>
   <title>Todo</title>
 </head>
 
@@ -30,7 +31,7 @@
         <div class="search-container" title="Search">
           <i class="search-icon fa-solid fa-magnifying-glass"></i>
           <input class="search-box" type="text" name="search" id="search-box" placeholder="Search">
-          <i class="search-icon ms-Icon ms-Icon--Clear"></i>
+          <i class="search-icon fa-solid fa-xmark" id="clear-icon"></i>
         </div>
       </div>
 
@@ -49,13 +50,13 @@
     <div class="bottom-content">
 
       <!---------- bottom left content  ----------->
-      <div class="bottom-left-content">
+      <div class="bottom-left-content" id="nav-bar">
         <div class="menu-container">
           <i class="menu-icon fa-solid fa-bars"></i>
         </div>
 
         <div class="default category-container">
-          <ul class="default categories">
+          <ul class="default categories" id="categories">
             <li>
               <i class="left-category-icon fa-regular fa-sun"></i>
               <div class="category-name">My Day</div>
@@ -81,27 +82,27 @@
               <div class="category-name">Tasks</div>
               <div class="number-of-item"></div>
             </li>
-            <li></li>
+            <li class="line"></li>
           </ul>
         </div>
 
-        <div class="custom category-conatiner">
-          <ul class="custom categories">
-            <li>
-              <i class="left-category-icon fa-solid fa-bars"></i>
-              <div class="category-name">Test</div>
-              <div class="number-of-item"></div>
-            </li>
-            <li class="create-category">
-              <div>
-                <i class="left-category-icon fa-solid fa-plus"></i>
-                <input class="add-category" type="text" name="new-list" id="new-list" placeholder="New List">
-              </div>
-              <div class="group-icon-container">
-                <i class="fa-solid fa-layer-group"></i>
-              </div>
-            </li>
-          </ul>
+        <div class="custom category-container">
+          <div class="create group">
+            <div>
+              <i class="fa-solid fa-layer-group"></i>
+              <input class="add-group" type="text" name="new-group" id="new-group" placeholder="Untitled Group">
+            </div>
+          </div>
+
+          <div class="create category">
+            <div>
+              <i class="left-category-icon fa-solid fa-plus"></i>
+              <input class="add-category" type="text" name="new-category" id="new-category" placeholder="New List">
+            </div>
+            <div class="group-icon-container">
+              <i class="group-icon fa-solid fa-layer-group"></i>
+            </div>
+          </div>
         </div>
 
         <div class="left-bottom-icon-container">
@@ -111,14 +112,17 @@
           <i class="left-bottom-icon fa-solid fa-paperclip"></i>
           <i class="left-bottom-icon fa-solid fa-check"></i>
         </div>
-      </div><!-------
+      </div>
+      <!-------
         
         bottom middle content
 
- ------><div class="bottom-middle-content">
+ ------>
+      <div class="bottom-middle-content" id="bottom-middle-content">
         <div class="items-toolbar">
           <div class="item-title-container">
-            <i class="icon fa-regular fa-sun"></i>
+            <i class="icon fa-regular fa-sun" id="category-title-icon"></i>
+            <i class="menu-icon fa-solid fa-bars" id="hidden-menu-icon"></i>
             <h3 class="item-title">My Day</h3>
             <i class="icon fa-solid fa-ellipsis"></i>
           </div>
@@ -135,17 +139,16 @@
           </div>
         </div>
 
-        <ul class="items">
-          <li class="create item-box">
+        <div class="items">
+          <div class="create item-box">
             <div class="item-icon-container">
               <i class="left-category-icon fa-solid fa-plus"></i>
             </div>
             <div class="item-name-container">
-              <input class="add-item" type="text" name="item" id="add-item" placeholder="Add a task">
+              <input class="add-item" type="text" name="item" id="new-item" placeholder="Add a task">
             </div>
-          </li>
-
-          <li class="item-conditions">
+          </div>
+          <div class="item-conditions">
             <div class="icon-container">
               <i class="left-bottom-icon fa-regular fa-calendar-days"></i>
               <i class="fa-regular fa-bell"></i>
@@ -154,21 +157,20 @@
             <div class="button-container">
               <input class="add-btn" type="button" value="Add">
             </div>
-          </li>
+          </div>
+        </div>
 
-          <li class="item-box">
-            <div class="item-icon-container">
-              <i class="before-check fa-regular fa-circle"></i>
-            </div>
-            <div class="item-name-container">
-              <div class="item name">Demo</div>
-              <div class="category name">Tasks</div>
-            </div>
-            <div class="item-icon-container">
-              <i class="left-category-icon fa-regular fa-star"></i>
-            </div>
-          </li>
+        <ul class="list items">
         </ul>
+
+        <div class="completed-title-container">
+          <i class="fa-solid fa-chevron-right"></i>
+          <h4 class="completed-title">Completed</h4>
+        </div>
+
+        <ul class="completed items">
+        </ul>
+
       </div>
 
       <!---------- bottom right content - pending  ----------->
