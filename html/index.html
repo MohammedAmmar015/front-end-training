@@ -55,34 +55,8 @@
           <i class="menu-icon fa-solid fa-bars"></i>
         </div>
 
-        <div class="default category-container">
+        <div class="default category-container" id="category-container">
           <ul class="default categories" id="categories">
-            <li>
-              <i class="left-category-icon fa-regular fa-sun"></i>
-              <div class="category-name">My Day</div>
-              <div class="number-of-item"></div>
-            </li>
-            <li>
-              <i class="left-category-icon fa-regular fa-star"></i>
-              <div class="category-name">Important</div>
-              <div class="number-of-item"></div>
-            </li>
-            <li>
-              <i class="left-category-icon fa-regular fa-calendar"></i>
-              <div class="category-name">Planned</div>
-              <div class="number-of-item"></div>
-            </li>
-            <li>
-              <i class="left-category-icon fa-regular fa-user"></i>
-              <div class="category-name">Assigned to me</div>
-              <div class="number-of-item"></div>
-            </li>
-            <li>
-              <i class="left-category-icon fa-solid fa-house"></i>
-              <div class="category-name">Tasks</div>
-              <div class="number-of-item"></div>
-            </li>
-            <li class="line"></li>
           </ul>
         </div>
 
@@ -112,27 +86,27 @@
           <i class="left-bottom-icon fa-solid fa-paperclip"></i>
           <i class="left-bottom-icon fa-solid fa-check"></i>
         </div>
-      </div>
-      <!-------
+      </div><!-------
         
         bottom middle content
 
- ------>
-      <div class="bottom-middle-content" id="bottom-middle-content">
+ ----><div class="bottom-middle-content" id="bottom-middle-content">
         <div class="items-toolbar">
           <div class="item-title-container">
             <i class="icon fa-regular fa-sun" id="category-title-icon"></i>
             <i class="menu-icon fa-solid fa-bars" id="hidden-menu-icon"></i>
-            <h3 class="item-title">My Day</h3>
+            <h3 class="item-title" id="item-title">My Day</h3>
             <i class="icon fa-solid fa-ellipsis"></i>
           </div>
-          <div class="feature sort" title="Sort">
-            <i class="feature-icon fa-solid fa-arrow-right-arrow-left"></i>
-            Sort
-          </div>
-          <div class="feature suggestions" title="Suggestions">
-            <i class="feature-icon fa-regular fa-lightbulb"></i>
-            Suggestions
+          <div class="feature-container">
+            <div class="feature sort" title="Sort">
+              <i class="feature-icon fa-solid fa-arrow-right-arrow-left"></i>
+              Sort
+            </div>
+            <div class="feature suggestions" title="Suggestions">
+              <i class="feature-icon fa-regular fa-lightbulb"></i>
+              Suggestions
+            </div>
           </div>
           <div class="created-date">
             Sunday, December 4
@@ -160,7 +134,7 @@
           </div>
         </div>
 
-        <ul class="list items">
+        <ul class="list items" id="items">
         </ul>
 
         <div class="completed-title-container">
