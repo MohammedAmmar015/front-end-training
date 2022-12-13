@@ -264,7 +264,7 @@
 .bottom-left-content .categories li.focused {
   background-color: #ecf6fd;
   border-left: 2px solid #2564cf;
-  font-size: 600;
+  font-weight: 800;
   padding-left: 26px;
 }
 
@@ -367,7 +367,6 @@
 }
 
 .bottom-middle-content .items-toolbar .created-date {
-  display: none;
   color: #656565;
   font-size: 13px;
   margin: 10px 0;
