@@ -36,14 +36,17 @@
 
   var tasks = [];
 
-  var selectedCategory;
+  let selectedCategory;
   const currentCategory = document.getElementById("item-title");
   const renderedCategories = document.getElementById("categories");
   const renderedItems = document.getElementById("items");
+  const completedItems = document.getElementById("completed-items");
+  const completedTitleContainer = document.getElementById("completed-title-container");
 
   function init() {
     renderCategory();
-    renderTask();
+    renderTask(false);
+    renderCompletedTask();
     attachEventListeners();
   }
 
@@ -51,7 +54,11 @@
     document.getElementById("new-category").addEventListener("keypress", handleNewCategory);
     document.getElementById("new-item").addEventListener("keypress", handleNewTask);
     renderedCategories.addEventListener("click", handleSelectCategory, true);
-    renderedItems.addEventListener("click", handleImportantTask, true);
+    renderedItems.addEventListener("click", handleTaskFunctionality, true);
+    renderedItems.addEventListener("mouseover", handleTaskFunctionality, true);
+    renderedItems.addEventListener("mouseout", handleTaskFunctionality, true);
+    completedItems.addEventListener("click", handleTaskFunctionality, true);
+    completedTitleContainer.addEventListener("click", handleCompletedBar);
   }
 
   function renderCategory() {
@@ -68,7 +75,6 @@
         renderedCategories.append(lineBreak);
       }
     });
-    console.log(selectedCategory);
     if (selectedCategory == undefined) {
       renderedCategories.firstChild.className = "focused";
     } else {
@@ -76,51 +82,90 @@
     }
   }
 
-  function renderTask() {
-    renderedItems.innerHTML = "";
+  function renderTask(isCompleted) {
+    if (isCompleted) {
+      completedItems.innerHTML = "";
+    } else {
+      renderedItems.innerHTML = "";
+    }
     let currentCategoryName = currentCategory.innerText.trim();
-    tasks.forEach(task => {
-      task.category.forEach(categoryName => {
-        if (categoryName === currentCategoryName) {
-          let newItem = createHTMLElement("li", { className: "item-box" });
-          let iconContainer = createHTMLElement("div", { className: "item-icon-container" });
-          let newIcon = createHTMLElement("i", { className: "check fa-regular fa-circle" });
-          iconContainer.append(newIcon);
+    tasks.filter(task => task.isCompleted == isCompleted)
+      .forEach(task => {
+        task.category.forEach(categoryName => {
+          if (categoryName === currentCategoryName) {
+            let newItem = createHTMLElement("li",
+              {
+                className: "item-box",
+                dataId: task.id
+              });
+            let iconContainer = createHTMLElement("div", { className: "item-icon-container" });
+            let newIcon = createHTMLElement("i",
+              {
+                className: isCompleted ? "fa-solid fa-circle-check" : "fa-regular fa-circle"
+              });
+            iconContainer.append(newIcon);
 
-          newItem.appendChild(iconContainer);
+            newItem.appendChild(iconContainer);
 
-          let itemNameContainer = createHTMLElement("div", { className: "item-name-container" });
-          let itemName = createHTMLElement("div", { className: "item name", value: task.name });
-          let categoryName = createHTMLElement("div", { className: "category name", value: currentCategoryName });
-          itemNameContainer.append(itemName);
-          itemNameContainer.append(categoryName);
+            let itemNameContainer = createHTMLElement("div", { className: "item-name-container" });
+            let itemName = createHTMLElement("div",
+              {
+                className: isCompleted ? "striked-task item name" : "item name",
+                id: "item-name",
+                value: task.name
+              });
+            let categoryName = createHTMLElement("div",
+              {
+                className: "category name",
+                value: currentCategoryName
+              });
+            itemNameContainer.append(itemName);
+            itemNameContainer.append(categoryName);
 
-          newItem.appendChild(itemNameContainer);
+            newItem.appendChild(itemNameContainer);
 
-          iconContainer = createHTMLElement("div", { className: "star item-icon-container" });
-          let regularIcon = "fa-regular fa-star";
-          let solidIcon = "fa-solid fa-star";
-          newIcon = createHTMLElement("i", { className: task.isImportant ? solidIcon : regularIcon });
-          iconContainer.append(newIcon);
+            iconContainer = createHTMLElement("div", { className: "star item-icon-container" });
+            let regularIcon = "fa-regular fa-star";
+            let solidIcon = "fa-solid fa-star";
+            newIcon = createHTMLElement("i", { className: task.isImportant ? solidIcon : regularIcon });
+            iconContainer.append(newIcon);
 
-          newItem.appendChild(iconContainer);
+            newItem.appendChild(iconContainer);
 
-          renderedItems.insertBefore(newItem, renderedItems.firstChild);
-        }
-      })
-    });
+            if (isCompleted) {
+              completedItems.append(newItem);
+            } else {
+              renderedItems.insertBefore(newItem, renderedItems.firstChild);
+            }
+          }
+        })
+      });
+  }
+
+  function renderCompletedTask() {
+    renderTask(true);
+    if (completedItems.children.length == 0) {
+      completedTitleContainer.classList.add("hide-block");
+    } else {
+      completedTitleContainer.classList.remove("hide-block");
+    }
   }
 
   function handleNewCategory(event) {
-    if (event.key == "Enter" && event.target.value.trim() != "") {
-      let category = {
-        id: categories.length + 1,
-        name: event.target.value,
-        iconClass: "fa-solid fa-list-ul"
+    let value = event.target.value.trim();
+    if (event.key == "Enter" && value != "") {
+      if (categories.filter(category => category.name == value).length > 0) {
+        alert("Name already exists");
+      } else {
+        let category = {
+          id: categories.length + 1,
+          name: event.target.value,
+          iconClass: "fa-solid fa-list-ul"
+        }
+        categories.push(category);
+        event.target.value = "";
+        renderCategory();
       }
-      categories.push(category);
-      event.target.value = "";
-      renderCategory();
     }
   }
 
@@ -131,7 +176,6 @@
       category = category.parentElement;
     }
     if (category.tagName == "LI") {
-      selectedCategory = category;
       for (var i = 0; i < menuCategories.length; i++) {
         menuCategories[i].className = "default";
         if (i === 5) {
@@ -140,7 +184,8 @@
       }
       category.className = "focused";
       currentCategory.innerText = category.innerText;
-      renderTask();
+      renderTask(false);
+      renderCompletedTask();
     }
   }
 
@@ -151,7 +196,8 @@
         id: tasks.length + 1,
         name: event.target.value,
         category: [currentCategoryName],
-        isImportant: false
+        isImportant: false,
+        isCompleted: false
       }
       if (currentCategoryName != "Tasks" && isDefaultCategory(currentCategoryName)) {
         task.category.push("Tasks");
@@ -159,46 +205,101 @@
       if (currentCategoryName == "Important") {
         task.isImportant = true;
       }
-      console.log(task);
       tasks.push(task);
       event.target.value = "";
-      renderTask();
+      renderTask(false);
+      renderCompletedTask();
+    }
+  }
+
+  function handleTaskFunctionality(event) {
+    if (event.target.tagName == "I") {
+      if (event.target.className == "fa-regular fa-star" || event.target.className == "fa-solid fa-star") {
+        handleImportantTask(event);
+      } else {
+        handleCompletedTask(event)
+      }
     }
   }
 
   function handleImportantTask(event) {
-    if (event.target.tagName == "I") {
+    if (event.type == "click") {
       if (event.target.className == "fa-regular fa-star") {
-        console.log("event occured");
         event.target.className = "fa-solid fa-star";
-        let taskName = event.target.parentElement.parentElement.getElementsByClassName("item name")[0].innerText.trim();
-        addToImportant(taskName, "Important");
+        let taskId = parseInt(event.target.parentElement.parentElement.getAttribute("data-id"));
+        addToCategory(taskId, "Important");
       } else if (event.target.className == "fa-solid fa-star") {
         event.target.className = "fa-regular fa-star";
-        let taskName = event.target.parentElement.parentElement.getElementsByClassName("item name")[0].innerText.trim();
-        removeFromImportant(taskName, "Important");
+        let taskId = parseInt(event.target.parentElement.parentElement.getAttribute("data-id"));
+        removeFromCategory(taskId, "Important");
       }
-      renderTask();
+      renderTask(false);
+      renderCompletedTask();
     }
   }
 
-  function addToImportant(taskName, category) {
+  function addToCategory(taskId, category) {
+    let taskIndex = getTaskIndexById(taskId);
+    let categoryIndex = tasks[taskIndex].category.indexOf(category);
+    if (categoryIndex == -1) {
+      tasks[taskIndex].category.push(category);
+    }
+    tasks[taskIndex].isImportant = true;
+  }
+
+  function removeFromCategory(taskId, category) {
+    let taskIndex = getTaskIndexById(taskId);
+    let categoryIndex = tasks[taskIndex].category.indexOf(category);
+    tasks[taskIndex].category.splice(categoryIndex, 1);
+    tasks[taskIndex].isImportant = false;
+  }
+
+  function getTaskIndexById(id) {
     for (let i = 0; i < tasks.length; i++) {
-      if (tasks[i].name === taskName) {
-        if (tasks[i].category.indexOf(category) == -1) {
-          tasks[i].category.push(category);
+      if (tasks[i].id === id) {
+        return i;
+      }
+    }
+  }
+
+  function handleCompletedTask(event) {
+    if (event.type == "click") {
+      if (event.target.className == "fa-regular fa-circle-check") {
+        let completedItem = event.target.parentElement.parentElement;
+        let taskId = parseInt(completedItem.getAttribute("data-id"));
+        let index = getTaskIndexById(taskId);
+        tasks[index].isCompleted = true;
+        let indexOfImportant = tasks[index].category.indexOf("Important");
+        if (indexOfImportant != -1) {
+          tasks[index].category.splice(indexOfImportant, 1);
         }
-        tasks[i].isImportant = true;
+      } else if (event.target.className == "fa-solid fa-circle-check") {
+        let completedItem = event.target.parentElement.parentElement;
+        let taskId = parseInt(completedItem.getAttribute("data-id")); 
+        let index = getTaskIndexById(taskId);
+        tasks[index].isCompleted = false;
+        let indexOfImportant = tasks[index].category.indexOf("Important");
+        if (indexOfImportant != -1) {
+          tasks[index].category.splice(indexOfImportant, 1);
+        }
       }
+      renderTask(false);
+      renderCompletedTask();
+    } else if (event.type == "mouseover" && event.target.className == "fa-regular fa-circle") {
+      event.target.className = "fa-regular fa-circle-check";
+    } else if (event.type == "mouseout" && event.target.className == "fa-regular fa-circle-check") {
+      event.target.className = "fa-regular fa-circle";
     }
   }
 
-  function removeFromImportant(taskName, category) {
-    for (let i = 0; i < tasks.length; i++) {
-      if (tasks[i].name === taskName) {
-        let index = tasks[i].category.indexOf(category);
-        tasks[i].category.splice(index, 1);
-        tasks[i].isImportant = false;
+  function handleCompletedBar(event) {
+    if (event.target.tagName == "DIV") {
+      if (event.target.children[0].className == "fa-solid fa-chevron-down") {
+        event.target.children[0].className = "fa-solid fa-chevron-right";
+        completedItems.classList.add("hide-block");
+      } else if (event.target.children[0].className == "fa-solid fa-chevron-right") {
+        completedItems.classList.remove("hide-block");
+        event.target.children[0].className = "fa-solid fa-chevron-down";
       }
     }
   }
@@ -213,6 +314,9 @@
     }
     if (attributes.value != null) {
       element.innerText = attributes.value;
+    }
+    if (attributes.dataId != null) {
+      element.setAttribute("data-id", attributes.dataId);
     }
     return element;
   }

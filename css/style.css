@@ -148,11 +148,10 @@
   height: 100%;
   vertical-align: top;
   border-right: 0.3px solid #d9d9d9;
-  /* overflow: auto; */
 }
 
 .bottom-left-content::-webkit-scrollbar {
-  width: 6px;
+  width: 2px;
 }
 
 .bottom-left-content::-webkit-scrollbar-thumb {
@@ -305,16 +304,6 @@
   height: 100%;
 }
 
-.bottom-middle-content::-webkit-scrollbar {
-  width: 6px;
-}
-
-.bottom-middle-content::-webkit-scrollbar-thumb {
-  background-color: #e2e2e2;
-  border-radius: 50px;
-}
-
-
 /* bottom middle content toolbar style  */
 .bottom-middle-content .items-toolbar {
   color: black;
@@ -466,6 +455,10 @@
   line-height: 2;
 }
 
+.bottom-middle-content .items .item-box .item-name-container .name.striked-task {
+  text-decoration: line-through;
+}
+
 .bottom-middle-content .items .item-box .item-name-container .category.name {
   line-height: 0;
   font-size: 12px;
@@ -493,24 +486,34 @@
 /* completed items styles */
 
 .bottom-middle-content .completed-title-container {
-  display: none;
+  display: block;
   margin: 0 35px;
   height: 52px;
   line-height: 3;
   border-bottom: 0.1px solid #dedede;
 }
 
+.bottom-middle-content .completed-title-container.hide-block {
+  display: none;
+}
+
 .bottom-middle-content .completed-title-container .completed-title {
   display: inline-block;
   margin: 0 10px;
+  pointer-events: none;
 }
 
 .bottom-middle-content .completed-title-container i {
   text-align: center;
   width: 20px;
+  pointer-events: none;
 }
 
 .bottom-middle-content .completed.items {
+  display: block;
+}
+
+.bottom-middle-content .completed.items.hide-block {
   display: none;
 }
 
