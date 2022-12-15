@@ -37,11 +37,18 @@
   var tasks = [];
 
   let selectedCategory;
+  const bottomLeftContent = document.getElementById("bottom-left-content");
+  const bottomMiddleContent = document.getElementById("bottom-middle-content");
   const currentCategory = document.getElementById("item-title");
   const renderedCategories = document.getElementById("categories");
   const renderedItems = document.getElementById("items");
   const completedItems = document.getElementById("completed-items");
   const completedTitleContainer = document.getElementById("completed-title-container");
+  const menuIcon = document.getElementById("menu-icon");
+  const categoryTitleIcon = document.getElementById("category-title-icon");
+  const createContainer = document.getElementById("create-container");
+  const bottomRightContent = document.getElementById("bottom-right-content");
+  const exitIcon = document.getElementById("exit-icon");
 
   function init() {
     renderCategory();
@@ -54,11 +61,14 @@
     document.getElementById("new-category").addEventListener("keypress", handleNewCategory);
     document.getElementById("new-item").addEventListener("keypress", handleNewTask);
     renderedCategories.addEventListener("click", handleSelectCategory, true);
-    renderedItems.addEventListener("click", handleTaskFunctionality, true);
+    renderedItems.addEventListener("click", handleTaskFunctionality);
     renderedItems.addEventListener("mouseover", handleTaskFunctionality, true);
     renderedItems.addEventListener("mouseout", handleTaskFunctionality, true);
     completedItems.addEventListener("click", handleTaskFunctionality, true);
     completedTitleContainer.addEventListener("click", handleCompletedBar);
+    menuIcon.addEventListener("click", handleMenuToggle);
+    categoryTitleIcon.addEventListener("click", handleMenuToggle);
+    exitIcon.addEventListener("click", handleTaskDetail);
   }
 
   function renderCategory() {
@@ -184,8 +194,15 @@
       }
       category.className = "focused";
       currentCategory.innerText = category.innerText;
-      renderTask(false);
-      renderCompletedTask();
+      categoryTitleIcon.className = category.firstChild.className;
+      if (currentCategory.innerText == "Assigned to me") {
+        createContainer.classList.add("hide-block");
+      } else {
+        createContainer.classList.remove("hide-block");
+        renderTask(false);
+        renderCompletedTask();
+      }
+
     }
   }
 
@@ -219,6 +236,8 @@
       } else {
         handleCompletedTask(event)
       }
+    } else if (event.target.tagName == "LI") {
+      handleTaskDetail(event);
     }
   }
 
@@ -227,27 +246,29 @@
       if (event.target.className == "fa-regular fa-star") {
         event.target.className = "fa-solid fa-star";
         let taskId = parseInt(event.target.parentElement.parentElement.getAttribute("data-id"));
-        addToCategory(taskId, "Important");
+        addToImportant(taskId, "Important");
       } else if (event.target.className == "fa-solid fa-star") {
         event.target.className = "fa-regular fa-star";
         let taskId = parseInt(event.target.parentElement.parentElement.getAttribute("data-id"));
-        removeFromCategory(taskId, "Important");
+        removeFromImportant(taskId, "Important");
       }
       renderTask(false);
       renderCompletedTask();
     }
   }
 
-  function addToCategory(taskId, category) {
+  function addToImportant(taskId, category) {
     let taskIndex = getTaskIndexById(taskId);
     let categoryIndex = tasks[taskIndex].category.indexOf(category);
     if (categoryIndex == -1) {
-      tasks[taskIndex].category.push(category);
+      if (!(tasks[taskIndex].isCompleted)) {
+        tasks[taskIndex].category.push(category);
+      }
     }
     tasks[taskIndex].isImportant = true;
   }
 
-  function removeFromCategory(taskId, category) {
+  function removeFromImportant(taskId, category) {
     let taskIndex = getTaskIndexById(taskId);
     let categoryIndex = tasks[taskIndex].category.indexOf(category);
     tasks[taskIndex].category.splice(categoryIndex, 1);
@@ -275,7 +296,7 @@
         }
       } else if (event.target.className == "fa-solid fa-circle-check") {
         let completedItem = event.target.parentElement.parentElement;
-        let taskId = parseInt(completedItem.getAttribute("data-id")); 
+        let taskId = parseInt(completedItem.getAttribute("data-id"));
         let index = getTaskIndexById(taskId);
         tasks[index].isCompleted = false;
         let indexOfImportant = tasks[index].category.indexOf("Important");
@@ -301,6 +322,26 @@
         completedItems.classList.remove("hide-block");
         event.target.children[0].className = "fa-solid fa-chevron-down";
       }
+    }
+  }
+
+  function handleMenuToggle(event) {
+    if (event.target.className == "menu-icon fa-solid fa-bars") {
+      bottomLeftContent.classList.add("hide-block");
+      bottomMiddleContent.classList.add("full-screen");
+    } else if (event.target.id = "category-title-icon") {
+      bottomLeftContent.classList.remove("hide-block");
+      bottomMiddleContent.classList.remove("full-screen");
+    }
+  }
+
+  function handleTaskDetail(event) {
+    if (event.type == "click" && event.target.tagName == "LI") {
+      bottomRightContent.classList.add("show-block");
+      bottomMiddleContent.classList.add("mid-screen");
+    } else if (event.target.id == "exit-icon") {
+      bottomRightContent.classList.remove("show-block");
+      bottomMiddleContent.classList.remove("mid-screen");
     }
   }
 

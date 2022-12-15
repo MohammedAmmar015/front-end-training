@@ -50,9 +50,9 @@
     <div class="bottom-content">
 
       <!---------- bottom left content  ----------->
-      <div class="bottom-left-content" id="nav-bar">
+      <div class="bottom-left-content" id="bottom-left-content">
         <div class="menu-container">
-          <i class="menu-icon fa-solid fa-bars"></i>
+          <i class="menu-icon fa-solid fa-bars" id="menu-icon"></i>
         </div>
 
         <div class="default category-container" id="category-container">
@@ -86,15 +86,16 @@
           <i class="left-bottom-icon fa-solid fa-paperclip"></i>
           <i class="left-bottom-icon fa-solid fa-check"></i>
         </div>
-      </div><!-------
+      </div>
+      <!-------
         
         bottom middle content
 
- ----><div class="bottom-middle-content" id="bottom-middle-content">
+ ---->
+      <div class="bottom-middle-content" id="bottom-middle-content">
         <div class="items-toolbar">
           <div class="item-title-container">
             <i class="icon fa-regular fa-sun" id="category-title-icon"></i>
-            <i class="menu-icon fa-solid fa-bars" id="hidden-menu-icon"></i>
             <h3 class="item-title" id="item-title">My Day</h3>
             <i class="icon fa-solid fa-ellipsis"></i>
           </div>
@@ -113,7 +114,7 @@
           </div>
         </div>
 
-        <div class="items">
+        <div class="items" id="create-container">
           <div class="create item-box">
             <div class="item-icon-container">
               <i class="left-category-icon fa-solid fa-plus"></i>
@@ -145,10 +146,105 @@
         <ul class="completed items" id="completed-items">
         </ul>
 
-      </div>
+      </div><!------ 
 
-      <!---------- bottom right content - pending  ----------->
-      <div class="bottom-right-content">
+        bottom right content 
+
+ ----><div class="bottom-right-content" id="bottom-right-content">
+        <div class="section task-title">
+          <div class="section-icon">
+            <i class="fa-regular fa-circle"></i>
+          </div>
+          <div class="section-name">
+            Demo
+          </div>
+          <div class="section-icon">
+            <i class="fa-regular fa-star"></i>
+          </div>
+        </div>
+
+        <div class="middle-sections">
+          <div class="section">
+            <div class="section-icon">
+              <i class="fa-solid fa-plus"></i>
+            </div>
+            <div class="section-name">
+              Add step
+            </div>
+          </div>
+
+          <div class="section">
+            <div class="section-icon">
+              <i class="fa-regular fa-sun"></i>
+            </div>
+            <div class="section-name">
+              Added to My Day
+            </div>
+          </div>
+
+          <ul class="conditions-section">
+            <li class="section">
+              <div class="section-icon">
+                <i class="fa-regular fa-bell"></i>
+              </div>
+              <div class="section-name">
+                Remind me
+              </div>
+            </li>
+            <li class="section">
+              <div class="section-icon">
+                <i class="left-bottom-icon fa-regular fa-calendar-days"></i>
+              </div>
+              <div class="section-name">
+                Add due date
+              </div>
+            </li>
+            <li class="section">
+              <div class="section-icon">
+                <i class="fa-solid fa-repeat"></i>
+              </div>
+              <div class="section-name">
+                Repeat
+              </div>
+            </li>
+          </ul>
+
+          <div class="section">
+            <div class="section-icon">
+              <i class="fa-solid fa-tag"></i>
+            </div>
+            <div class="section-name">
+              Pick a category
+            </div>
+          </div>
+
+          <div class="section">
+            <div class="section-icon">
+              <i class="fa-solid fa-paperclip"></i>
+            </div>
+            <div class="section-name">
+              Add file
+            </div>
+          </div>
+
+          <div class="section">
+            <textarea name="note" id="note" class="note-input" placeholder="Add note"></textarea>
+            <div class="updated-time">Updated a few seconds ago</div>
+          </div>
+
+        </div>
+
+        <div class="bottom-section">
+          <div class="section-icon">
+            <i class="fa-solid fa-right-from-bracket" id="exit-icon"></i>
+          </div>
+          <div class="section-name">
+            Created on Mon, December 12
+          </div>
+          <div class="section-icon">
+            <i class="fa-solid fa-trash"></i>
+          </div>
+        </div>
 
       </div>
     </div>
