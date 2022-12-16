@@ -613,6 +613,10 @@
   width: 83%;
 }
 
+.bottom-right-content .section-name.striked {
+  text-decoration: line-through;
+}
+
 .bottom-right-content .section.section.task-title .section-name, .bottom-right-content .bottom-section .section-name {
   width: 67%;
 }
@@ -621,6 +625,7 @@
   border: none;
   outline: none;
   width: 89%;
-  resize: none;
   font-size: 16px;
+  min-height: 52px;
+  height: auto;
 }

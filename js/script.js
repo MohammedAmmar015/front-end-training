@@ -49,6 +49,9 @@
   const createContainer = document.getElementById("create-container");
   const bottomRightContent = document.getElementById("bottom-right-content");
   const exitIcon = document.getElementById("exit-icon");
+  const taskTitleSection = document.getElementById("task-title-section");
+  const noteSection = document.getElementById("note-section");
+  const addNote = document.getElementById("add-note");
 
   function init() {
     renderCategory();
@@ -69,6 +72,8 @@
     menuIcon.addEventListener("click", handleMenuToggle);
     categoryTitleIcon.addEventListener("click", handleMenuToggle);
     exitIcon.addEventListener("click", handleTaskDetail);
+    // addNote.addEventListener("keypress", handleNewNote);
+    taskTitleSection.addEventListener("click", handleTaskFunctionality);
   }
 
   function renderCategory() {
@@ -111,7 +116,8 @@
             let iconContainer = createHTMLElement("div", { className: "item-icon-container" });
             let newIcon = createHTMLElement("i",
               {
-                className: isCompleted ? "fa-solid fa-circle-check" : "fa-regular fa-circle"
+                className: isCompleted ? "fa-solid fa-circle-check" : "fa-regular fa-circle",
+                dataId: task.id
               });
             iconContainer.append(newIcon);
 
@@ -137,7 +143,11 @@
             iconContainer = createHTMLElement("div", { className: "star item-icon-container" });
             let regularIcon = "fa-regular fa-star";
             let solidIcon = "fa-solid fa-star";
-            newIcon = createHTMLElement("i", { className: task.isImportant ? solidIcon : regularIcon });
+            newIcon = createHTMLElement("i",
+              {
+                className: task.isImportant ? solidIcon : regularIcon,
+                dataId: task.id
+              });
             iconContainer.append(newIcon);
 
             newItem.appendChild(iconContainer);
@@ -202,7 +212,6 @@
         renderTask(false);
         renderCompletedTask();
       }
-
     }
   }
 
@@ -214,7 +223,8 @@
         name: event.target.value,
         category: [currentCategoryName],
         isImportant: false,
-        isCompleted: false
+        isCompleted: false,
+        note: ""
       }
       if (currentCategoryName != "Tasks" && isDefaultCategory(currentCategoryName)) {
         task.category.push("Tasks");
@@ -243,17 +253,18 @@
 
   function handleImportantTask(event) {
     if (event.type == "click") {
+      let taskId = parseInt(event.target.getAttribute("data-id"));
       if (event.target.className == "fa-regular fa-star") {
         event.target.className = "fa-solid fa-star";
-        let taskId = parseInt(event.target.parentElement.parentElement.getAttribute("data-id"));
         addToImportant(taskId, "Important");
       } else if (event.target.className == "fa-solid fa-star") {
         event.target.className = "fa-regular fa-star";
-        let taskId = parseInt(event.target.parentElement.parentElement.getAttribute("data-id"));
+        // let taskId = parseInt(event.target.parentElement.parentElement.getAttribute("data-id"));
         removeFromImportant(taskId, "Important");
       }
       renderTask(false);
       renderCompletedTask();
+      renderTaskDetail(taskId);
     }
   }
 
@@ -277,16 +288,17 @@
 
   function getTaskIndexById(id) {
     for (let i = 0; i < tasks.length; i++) {
-      if (tasks[i].id === id) {
+      if (tasks[i].id === parseInt(id)) {
         return i;
       }
     }
   }
 
   function handleCompletedTask(event) {
+    console.log(event);
     if (event.type == "click") {
       if (event.target.className == "fa-regular fa-circle-check") {
-        let completedItem = event.target.parentElement.parentElement;
+        let completedItem = event.target;
         let taskId = parseInt(completedItem.getAttribute("data-id"));
         let index = getTaskIndexById(taskId);
         tasks[index].isCompleted = true;
@@ -294,8 +306,11 @@
         if (indexOfImportant != -1) {
           tasks[index].category.splice(indexOfImportant, 1);
         }
+        renderTask(false);
+        renderCompletedTask();
+        renderTaskDetail(taskId);
       } else if (event.target.className == "fa-solid fa-circle-check") {
-        let completedItem = event.target.parentElement.parentElement;
+        let completedItem = event.target;
         let taskId = parseInt(completedItem.getAttribute("data-id"));
         let index = getTaskIndexById(taskId);
         tasks[index].isCompleted = false;
@@ -303,9 +318,10 @@
         if (indexOfImportant != -1) {
           tasks[index].category.splice(indexOfImportant, 1);
         }
+        renderTask(false);
+        renderCompletedTask();
+        renderTaskDetail(taskId);
       }
-      renderTask(false);
-      renderCompletedTask();
     } else if (event.type == "mouseover" && event.target.className == "fa-regular fa-circle") {
       event.target.className = "fa-regular fa-circle-check";
     } else if (event.type == "mouseout" && event.target.className == "fa-regular fa-circle-check") {
@@ -339,10 +355,40 @@
     if (event.type == "click" && event.target.tagName == "LI") {
       bottomRightContent.classList.add("show-block");
       bottomMiddleContent.classList.add("mid-screen");
+      renderTaskDetail(event.target.getAttribute("data-id"));
     } else if (event.target.id == "exit-icon") {
       bottomRightContent.classList.remove("show-block");
       bottomMiddleContent.classList.remove("mid-screen");
     }
+  }
+
+  function renderTaskDetail(taskId) {
+    taskTitleSection.innerHTML = "";
+    let taskIndex = getTaskIndexById(taskId);
+    let task = tasks[taskIndex];
+    let checkIconContainer = createHTMLElement("div", { className: "section-icon" });
+    let regularIcon = "fa-regular fa-circle";
+    let solidIcon = "fa-solid fa-circle-check";
+    let checkIcon = createHTMLElement("i",
+      {
+        className: task.isCompleted ? solidIcon : regularIcon,
+        dataId: taskId
+      });
+    checkIconContainer.append(checkIcon);
+    let nameContainer = createHTMLElement("div", { className: task.isCompleted ? "striked section-name" : "section-name" });
+    nameContainer.innerText = task.name;
+    let starIconContainer = createHTMLElement("div", { className: "section-icon" });
+    regularIcon = "fa-regular fa-star";
+    solidIcon = "fa-solid fa-star";
+    let starIcon = createHTMLElement("i",
+      {
+        className: task.isImportant ? solidIcon : regularIcon,
+        dataId: taskId
+      });
+    starIconContainer.append(starIcon)
+    taskTitleSection.append(checkIconContainer);
+    taskTitleSection.append(nameContainer);
+    taskTitleSection.append(starIconContainer);
   }
 
   function createHTMLElement(type, attributes) {
